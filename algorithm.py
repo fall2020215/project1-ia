@@ -135,9 +135,10 @@ def shortest_path(current_heap, hashtable_node, hashtable_heap, list_node, final
                         total_distance = distance_straight + distance_nodes
                         path = node_expand[1][3] + "-" + i.get_name()
                         heapq.heappush(current_heap, (total_distance, (i.get_name(), distance_nodes, total_distance, path)))
+                        hashtable_heap[i.get_name()] = (i.get_name(), distance_nodes, total_distance, path)
                     else:
                         distance_straight = distance_straight_to_final_node(i.get_name(),final_x,final_y,hashtable_node, list_node)
-                        distance_nodes = distance_between_two_nodes(name, i.get_name(), hashtable_node, list_node) + + node_expand[1][1]
+                        distance_nodes = distance_between_two_nodes(name, i.get_name(), hashtable_node, list_node) +  node_expand[1][1]
                         total_distance = distance_straight + distance_nodes
                         if total_distance >= hashtable_heap[name][2]:
                             pass
@@ -146,6 +147,7 @@ def shortest_path(current_heap, hashtable_node, hashtable_heap, list_node, final
                             path = node_expand[1][3] + "-" + i.get_name()
                             heapq.heappush(current_heap, (total_distance, (i.get_name(), distance_nodes, total_distance, path)))
                             hashtable_node[i.get_name()] = (i.get_name(), distance_nodes, total_distance, path)
+
 
 
 
