@@ -60,7 +60,7 @@ final_y = list_node[final_row][final_column].get_y()
 #################################
 #WE HAVE TO CHANGE THE FIRST NODE
 ##################################
-first_name = 'B44'
+first_name = 'R0'
 first_neighbor = a.neighbor_nodes(first_name,hashtable_node, list_node)
 
 row_first_node, column_first_node = hashtable_node[first_name]

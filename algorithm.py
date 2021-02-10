@@ -122,8 +122,15 @@ def shortest_path(current_heap, hashtable_node, hashtable_heap, list_node, final
         node_expand = heapq.heappop(current_heap)
         
         if node_expand[1][0] == final_name:
-            print(node_expand[1][2])
-            print(node_expand[1][3])
+            print("The final solution path is: ")
+            total_path = ""
+            list_name_node = node_expand[1][3].split("-")
+            for i in range (0, len(list_name_node)-1):
+                #R0 to B16 distance: 35.0,
+                total_path += list_name_node[i] + " " + list_name_node[i + 1] + " " + "distance: " + str(round(distance_between_two_nodes(list_name_node[i],list_name_node[i+1], hashtable_node, list_node), 3)) + ",\n"
+
+            print(total_path)
+            print("Total path length: " + str(round(node_expand[1][2], 3)))
             flag = True
             break #should print the total distance
         else:
