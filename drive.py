@@ -55,8 +55,35 @@ final_y = list_node[final_row][final_column].get_y()
 
 ################### BEGINNING ---  A* Algorithm for shortest path #############################
 
-        
 
+
+#################################
+#WE HAVE TO CHANGE THE FIRST NODE
+##################################
+first_name = 'R0'
+first_neighbor = a.neighbor_nodes(first_name,hashtable_node, list_node)
+
+row_first_node, column_first_node = hashtable_node[first_name]
+first_node = list_node[row_first_node][column_first_node]
+
+
+
+#################################
+#CHANGE THE FIRST NODE
+#################################
+
+#innital for current_heap and hashtable_heap for first node:
+#heapq.heappush(customers, (9, "Stacy"))
+distance_straight = a.distance_straight_to_final_node(first_name,final_x,final_y,hashtable_node, list_node)
+heapq.heappush(current_heap, (distance_straight, (first_name, 0, distance_straight, first_name)))
+hashtable_heap[first_name] = (first_name, 0 , distance_straight, first_name)
+
+
+
+#print(heapq.heappop(current_heap))
+#print(hashtable_heap)
+#print(heapq.heappop(current_heap)[1][0])
+#print(heapq.heappop(current_heap)[0])
 
 ################### ENDING  --- A* Algorithm for shortest path ################################
 
@@ -64,4 +91,13 @@ final_y = list_node[final_row][final_column].get_y()
 #print(hashtable_node['B16'])
 #print(a.distance_between_two_nodes('R0','B16',hashtable_node, list_node))
 
-print()
+'''
+THe result will include the final node "O" in the list.
+neighbor = a.neighbor_nodes('B16',hashtable_node, list_node)
+print(len(neighbor))
+for element in neighbor:
+
+    print(element.get_name())
+'''
+
+a.shortest_path(current_heap,hashtable_node,hashtable_heap,list_node,final_x,final_y,'O')
