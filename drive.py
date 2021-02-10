@@ -60,7 +60,7 @@ final_y = list_node[final_row][final_column].get_y()
 #################################
 #WE HAVE TO CHANGE THE FIRST NODE
 ##################################
-first_name = 'R0'
+first_name = 'R11'
 first_neighbor = a.neighbor_nodes(first_name,hashtable_node, list_node)
 
 row_first_node, column_first_node = hashtable_node[first_name]
@@ -101,3 +101,10 @@ for element in neighbor:
 '''
 
 a.shortest_path(current_heap,hashtable_node,hashtable_heap,list_node,final_x,final_y,'O')
+
+d1= a.distance_between_two_nodes('R11','B4',hashtable_node, list_node)
+d2 = a.distance_between_two_nodes('B4','R6',hashtable_node, list_node)
+d3 = a.distance_between_two_nodes('R6','B30',hashtable_node, list_node)
+d4 = a.distance_between_two_nodes('B30','O',hashtable_node, list_node)
+
+print(d1+d2+d3+d4)

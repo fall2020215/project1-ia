@@ -49,24 +49,32 @@ def neighbor_nodes (name, hashtable_node, list_node):
         for i in range (0, row):
             if list_node[i][column].get_name()[0] != color: 
                 neighbor_node.append(list_node[i][column])
+                print("From N")
+                print(list_node[i][column].get_name())
  
         return neighbor_node
     elif dir == "S":
         for i in range (row + 1, number_row):
             if list_node[i][column].get_name()[0] != color: 
                 neighbor_node.append(list_node[i][column])
+                print("From S")
+                print(list_node[i][column].get_name())
 
         return neighbor_node
     elif dir == "E":
         for i in range (column + 1, number_column):
             if list_node[row][i].get_name()[0] != color: 
                 neighbor_node.append(list_node[row][i])
+                print("From E")
+                print(list_node[row][i].get_name())
 
         return neighbor_node
     elif dir == "W":
         for i in range (0, column):
             if list_node[row][i].get_name()[0] != color: 
                 neighbor_node.append(list_node[row][i])
+                print("From W")
+                print(list_node[row][i].get_name())
  
         return neighbor_node
     elif dir == "NE":
@@ -74,6 +82,8 @@ def neighbor_nodes (name, hashtable_node, list_node):
             for j in range (column + 1, number_column):
                 if list_node[i][j].get_name()[0] != color: 
                     neighbor_node.append(list_node[i][j])
+                    print("From NE")
+                    print(list_node[i][j].get_name())
 
         return neighbor_node
     elif dir == "NW":
@@ -81,6 +91,8 @@ def neighbor_nodes (name, hashtable_node, list_node):
             for j in range (0, column):
                 if list_node[i][j].get_name()[0] != color: 
                     neighbor_node.append(list_node[i][j])
+                    print("From NW")
+                    print(list_node[i][j].get_name())
 
         return neighbor_node
     elif dir == "SE":
@@ -88,6 +100,8 @@ def neighbor_nodes (name, hashtable_node, list_node):
             for j in range (column + 1, number_column):
                 if list_node[i][j].get_name()[0] != color: 
                     neighbor_node.append(list_node[i][j])
+                    print("From SE")
+                    print(list_node[i][j].get_name())
 
         return neighbor_node
     elif dir == "SW":
@@ -95,6 +109,8 @@ def neighbor_nodes (name, hashtable_node, list_node):
             for j in range (0, column):
                 if list_node[i][j].get_name()[0] != color: 
                     neighbor_node.append(list_node[i][j])
+                    print("From SW")
+                    print(list_node[i][j].get_name())
 
         return neighbor_node
 
@@ -104,6 +120,7 @@ def shortest_path(current_heap, hashtable_node, hashtable_heap, list_node, final
         node_expand = heapq.heappop(current_heap)
         if node_expand[1][0] == final_name:
             print(node_expand[1][2])
+            print(node_expand[1][3])
             break #should print the total distance
         else:
             name = node_expand[1][0]
@@ -125,7 +142,7 @@ def shortest_path(current_heap, hashtable_node, hashtable_heap, list_node, final
                         if total_distance >= hashtable_heap[name][2]:
                             pass
                         else:
-                            current_heap.remove((hashtable_node[i.get_name()][0],(hashtable_node[i.get_name()][1])))
+                            current_heap.remove((hashtable_heap[i.get_name()][0],(hashtable_heap[i.get_name()][1])))
                             path = node_expand[1][3] + "-" + i.get_name()
                             heapq.heappush(current_heap, (total_distance, (i.get_name(), distance_nodes, total_distance, path)))
                             hashtable_node[i.get_name()] = (i.get_name(), distance_nodes, total_distance, path)
