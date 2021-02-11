@@ -49,32 +49,24 @@ def neighbor_nodes (name, hashtable_node, list_node):
         for i in range (0, row):
             if list_node[i][column].get_name()[0] != color: 
                 neighbor_node.append(list_node[i][column])
-                #print("From N")
-                #print(list_node[i][column].get_name())
  
         return neighbor_node
     elif dir == "S":
         for i in range (row + 1, number_row):
             if list_node[i][column].get_name()[0] != color: 
                 neighbor_node.append(list_node[i][column])
-                #print("From S")
-                #print(list_node[i][column].get_name())
 
         return neighbor_node
     elif dir == "E":
         for i in range (column + 1, number_column):
             if list_node[row][i].get_name()[0] != color: 
                 neighbor_node.append(list_node[row][i])
-                #print("From E")
-                #print(list_node[row][i].get_name())
 
         return neighbor_node
     elif dir == "W":
         for i in range (0, column):
             if list_node[row][i].get_name()[0] != color: 
                 neighbor_node.append(list_node[row][i])
-                #print("From W")
-                #print(list_node[row][i].get_name())
  
         return neighbor_node
     elif dir == "NE":
@@ -82,8 +74,6 @@ def neighbor_nodes (name, hashtable_node, list_node):
             for j in range (column + 1, number_column):
                 if list_node[i][j].get_name()[0] != color: 
                     neighbor_node.append(list_node[i][j])
-                    #print("From NE")
-                    #print(list_node[i][j].get_name())
 
         return neighbor_node
     elif dir == "NW":
@@ -91,8 +81,6 @@ def neighbor_nodes (name, hashtable_node, list_node):
             for j in range (0, column):
                 if list_node[i][j].get_name()[0] != color: 
                     neighbor_node.append(list_node[i][j])
-                    #print("From NW")
-                    #print(list_node[i][j].get_name())
 
         return neighbor_node
     elif dir == "SE":
@@ -100,8 +88,6 @@ def neighbor_nodes (name, hashtable_node, list_node):
             for j in range (column + 1, number_column):
                 if list_node[i][j].get_name()[0] != color: 
                     neighbor_node.append(list_node[i][j])
-                    #print("From SE")
-                    #print(list_node[i][j].get_name())
 
         return neighbor_node
     elif dir == "SW":
@@ -109,9 +95,7 @@ def neighbor_nodes (name, hashtable_node, list_node):
             for j in range (0, column):
                 if list_node[i][j].get_name()[0] != color: 
                     neighbor_node.append(list_node[i][j])
-                    #print("From SW")
-                    #print(list_node[i][j].get_name())
-
+  
         return neighbor_node
 
 
@@ -126,13 +110,13 @@ def shortest_path(current_heap, hashtable_node, hashtable_heap, list_node, final
             total_path = ""
             list_name_node = node_expand[1][3].split("-")
             for i in range (0, len(list_name_node)-1):
-                #R0 to B16 distance: 35.0,
-                total_path += list_name_node[i] + " " + list_name_node[i + 1] + " " + "distance: " + str(round(distance_between_two_nodes(list_name_node[i],list_name_node[i+1], hashtable_node, list_node), 3)) + ",\n"
+                total_path += list_name_node[i] + " to " + list_name_node[i + 1]  + " distance: " + str(round(distance_between_two_nodes(list_name_node[i],list_name_node[i+1], hashtable_node, list_node), 3)) + ",\n"
 
             print(total_path)
+            print("*****************************************")
             print("Total path length: " + str(round(node_expand[1][2], 3)))
             flag = True
-            break #should print the total distance
+            break 
         else:
             
             name = node_expand[1][0]
@@ -159,27 +143,8 @@ def shortest_path(current_heap, hashtable_node, hashtable_heap, list_node, final
                             path = node_expand[1][3] + "-" + i.get_name()
                             heapq.heappush(current_heap, (total_distance, (i.get_name(), distance_nodes, total_distance, path)))
                             hashtable_node[i.get_name()] = (i.get_name(), distance_nodes, total_distance, path)
-            '''
-            print("City selected: " +  node_expand[1][0])
-            possible_node = ""
-            possible_path = ""
-            if len(neighbor) != 0:
-                for i in neighbor:
-                    possible_node += i.get_name() + " "
-                    distance_straight = distance_straight_to_final_node(i.get_name(),final_x,final_y,hashtable_node, list_node)
-                    distance_nodes = distance_between_two_nodes(name, i.get_name(), hashtable_node, list_node) +  node_expand[1][1]
-                    total_distance = distance_straight + distance_nodes
-                    possible_path += i.get_name() + "(" + str(total_distance) + ")" + " "
-            else:
-                possible_node = "NOTHING"
-                possible_path = "NOTHING"
-            print("Possible node to travel: " + possible_node)
-            #Node at the end of possible path: R25(202.0) R61(223.777)
             
-        
-            print("Node at the end of possible path: " + possible_path)
-            print("********************************************************************************************************************")
-            '''
+            #print the path
             print("City selected: " +  node_expand[1][0])
             possible_node = ""
             possible_path = ""
@@ -195,10 +160,72 @@ def shortest_path(current_heap, hashtable_node, hashtable_heap, list_node, final
 
 
     if flag != True:
-        print("Do not a path to go the final node")
+        print("Do not have any path to go the final node")
 
 
         
+def fewest_node_path(current_heap, hashtable_node, hashtable_heap, list_node, final_x, final_y, final_name):
+    flag = False
+    neighbor = []
+    while len(current_heap) != 0:
+        node_expand = heapq.heappop(current_heap)
+        
+        if node_expand[1][0] == final_name:
+            print("The final solution path is: ")
+            total_path = ""
+            list_name_node = node_expand[1][3].split("-")
+            for i in range (0, len(list_name_node)-1):
+                total_path += list_name_node[i] + " to " + list_name_node[i + 1]  + " distance: " + "1,\n"
+
+            print(total_path)
+            print("*****************************************")
+            print("Total path length: " + str(round(node_expand[1][2], 3)))
+            flag = True
+            break 
+        else:
+            
+            name = node_expand[1][0]
+            neighbor = neighbor_nodes(name,hashtable_node,list_node)
+            if len(neighbor) == 0:
+                pass
+            else:
+                for i in neighbor:
+                    if i.get_name() not in hashtable_heap:
+                        distance_straight = 0
+                        distance_nodes = 1 + node_expand[1][1]
+                        total_distance = distance_straight + distance_nodes
+                        path = node_expand[1][3] + "-" + i.get_name()
+                        heapq.heappush(current_heap, (total_distance, (i.get_name(), distance_nodes, total_distance, path)))
+                        hashtable_heap[i.get_name()] = (i.get_name(), distance_nodes, total_distance, path)
+                    else:
+                        distance_straight = 0
+                        distance_nodes = 1 +  node_expand[1][1]
+                        total_distance = distance_straight + distance_nodes
+                        if total_distance >= hashtable_heap[name][2]:
+                            pass
+                        else:
+                            current_heap.remove((hashtable_heap[i.get_name()][0],(hashtable_heap[i.get_name()][1])))
+                            path = node_expand[1][3] + "-" + i.get_name()
+                            heapq.heappush(current_heap, (total_distance, (i.get_name(), distance_nodes, total_distance, path)))
+                            hashtable_node[i.get_name()] = (i.get_name(), distance_nodes, total_distance, path)
+            
+            #print the path
+            print("City selected: " +  node_expand[1][0])
+            possible_node = ""
+            possible_path = ""
+    
+            for i in current_heap:
+                possible_node += i[1][0] + " "
+               
+                possible_path += i[1][0] + "(" + str(round(i[0],3)) + ")" + " "
+
+            print("Possible node to travel: " + possible_node)
+            print("Node at the end of possible path: " + possible_path)
+            print("********************************************************************************************************************")
+
+
+    if flag != True:
+        print("Do not have any path to go the final node")
 
         
 

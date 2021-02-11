@@ -11,6 +11,8 @@ size_maze = [] #keep the size of list_node (row and column)
 hashtable_node = {} # key of hashtable_node is the name of node, and the value is the tuple of (row, column) in the array (list_node)
 hashtable_heap = {} # key of hashtable_heap is the name of node, and the value is ....
 current_heap = [] #current_heap is a list (array) of tuples that store all information about node_name, travel_distance, total_distance, and path
+
+
  
 #extract all information from maza.txt into list_node
 with open ("maze.txt") as file:
@@ -60,7 +62,7 @@ final_y = list_node[final_row][final_column].get_y()
 #################################
 #WE HAVE TO CHANGE THE FIRST NODE
 ##################################
-first_name = 'R0'
+first_name = 'R26'
 first_neighbor = a.neighbor_nodes(first_name,hashtable_node, list_node)
 
 row_first_node, column_first_node = hashtable_node[first_name]
@@ -100,4 +102,12 @@ for element in neighbor:
     print(element.get_name())
 '''
 
-a.shortest_path(current_heap,hashtable_node,hashtable_heap,list_node,final_x,final_y,'O')
+#a.shortest_path(current_heap,hashtable_node,hashtable_heap,list_node,final_x,final_y,'O')
+
+#FOR FEWEST NODE PATH
+heapq.heappush(current_heap, (1, (first_name, 0, 1, first_name)))
+hashtable_heap[first_name] = (first_name, 0 , 1, first_name)
+
+
+a.fewest_node_path(current_heap,hashtable_node,hashtable_heap,list_node,final_x,final_y,'O')
+
