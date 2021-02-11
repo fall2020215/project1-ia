@@ -99,7 +99,7 @@ def neighbor_nodes (name, hashtable_node, list_node):
         return neighbor_node
 
 
-def shortest_path(current_heap, hashtable_node, hashtable_heap, list_node, final_x, final_y, final_name): 
+def shortest_path(current_heap, hashtable_node, hashtable_heap, list_node, final_x, final_y, final_name, flag_step): 
     flag = False
     neighbor = []
     while len(current_heap) != 0:
@@ -144,19 +144,20 @@ def shortest_path(current_heap, hashtable_node, hashtable_heap, list_node, final
                             heapq.heappush(current_heap, (total_distance, (i.get_name(), distance_nodes, total_distance, path)))
                             hashtable_node[i.get_name()] = (i.get_name(), distance_nodes, total_distance, path)
             
-            #print the path
-            print("City selected: " +  node_expand[1][0])
-            possible_node = ""
-            possible_path = ""
+            
+            if flag_step:
+                #print the path
+                print("Node selected: " +  node_expand[1][0])
+                possible_node = ""
+                possible_path = ""
     
-            for i in current_heap:
-                possible_node += i[1][0] + " "
-               
-                possible_path += i[1][0] + "(" + str(round(i[0],3)) + ")" + " "
+                for i in current_heap:
+                    possible_node += i[1][0] + " "
+                    possible_path += i[1][0] + "(" + str(round(i[0],3)) + ")" + " "
 
-            print("Possible node to travel: " + possible_node)
-            print("Node at the end of possible path: " + possible_path)
-            print("********************************************************************************************************************")
+                print("Possible node to travel: " + possible_node)
+                print("Node at the end of possible path: " + possible_path)
+                print("********************************************************************************************************************")
 
 
     if flag != True:
@@ -164,7 +165,7 @@ def shortest_path(current_heap, hashtable_node, hashtable_heap, list_node, final
 
 
         
-def fewest_node_path(current_heap, hashtable_node, hashtable_heap, list_node, final_x, final_y, final_name):
+def fewest_node_path(current_heap, hashtable_node, hashtable_heap, list_node, final_x, final_y, final_name, flag_step):
     flag = False
     neighbor = []
     while len(current_heap) != 0:
@@ -209,25 +210,53 @@ def fewest_node_path(current_heap, hashtable_node, hashtable_heap, list_node, fi
                             heapq.heappush(current_heap, (total_distance, (i.get_name(), distance_nodes, total_distance, path)))
                             hashtable_node[i.get_name()] = (i.get_name(), distance_nodes, total_distance, path)
             
-            #print the path
-            print("City selected: " +  node_expand[1][0])
-            possible_node = ""
-            possible_path = ""
+            if flag_step:
+                #print the path
+                print("Node selected: " +  node_expand[1][0])
+                possible_node = ""
+                possible_path = ""
     
-            for i in current_heap:
-                possible_node += i[1][0] + " "
-               
-                possible_path += i[1][0] + "(" + str(round(i[0],3)) + ")" + " "
+                for i in current_heap:
+                    possible_node += i[1][0] + " "
+                    possible_path += i[1][0] + "(" + str(round(i[0],3)) + ")" + " "
 
-            print("Possible node to travel: " + possible_node)
-            print("Node at the end of possible path: " + possible_path)
-            print("********************************************************************************************************************")
+                print("Possible node to travel: " + possible_node)
+                print("Node at the end of possible path: " + possible_path)
+                print("********************************************************************************************************************")
 
 
     if flag != True:
-        print("Do not have any path to go the final node")
+        print("\nDo not have any path to go the final node\n")
 
+
+############################### Check the input value ############################################
+
+class Input_Value:
+    #If the value is number (int, float)
+    def isNumber(self,input):
+        try:
+            float(input)
+            return True
+        except ValueError:
+            return False
+
+    def isInt(self,input):
+        try:
+            int(input)
+            return True
+        except ValueError:
+            return False
+
+#check the value of option input
+def check_option(value, low, high):
+    p = Input_Value()
+    while not p.isInt(value) or int(value) < low or int(value) > high:
+        print("\nThe option should be a integer number between " + str(low) + " and " + str(high) + "!")
+        print("Try again for your option!\n")
+        value = input("Your selection: ")
+        
+    return value
         
 
-
+############################################################################################################
 

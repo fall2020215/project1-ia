@@ -13,7 +13,8 @@ hashtable_heap = {} # key of hashtable_heap is the name of node, and the value i
 current_heap = [] #current_heap is a list (array) of tuples that store all information about node_name, travel_distance, total_distance, and path
 
 
- 
+flag_algorithm = True
+flag_step = True
 #extract all information from maza.txt into list_node
 with open ("maze.txt") as file:
     size_maze = file.readline() 
@@ -62,11 +63,13 @@ final_y = list_node[final_row][final_column].get_y()
 #################################
 #WE HAVE TO CHANGE THE FIRST NODE
 ##################################
+'''
 first_name = 'R26'
 first_neighbor = a.neighbor_nodes(first_name,hashtable_node, list_node)
 
 row_first_node, column_first_node = hashtable_node[first_name]
 first_node = list_node[row_first_node][column_first_node]
+'''
 
 
 
@@ -76,10 +79,12 @@ first_node = list_node[row_first_node][column_first_node]
 
 #innital for current_heap and hashtable_heap for first node:
 #heapq.heappush(customers, (9, "Stacy"))
+'''
 distance_straight = a.distance_straight_to_final_node(first_name,final_x,final_y,hashtable_node, list_node)
 heapq.heappush(current_heap, (distance_straight, (first_name, 0, distance_straight, first_name)))
 hashtable_heap[first_name] = (first_name, 0 , distance_straight, first_name)
 
+'''
 
 
 #print(heapq.heappop(current_heap))
@@ -105,9 +110,61 @@ for element in neighbor:
 #a.shortest_path(current_heap,hashtable_node,hashtable_heap,list_node,final_x,final_y,'O')
 
 #FOR FEWEST NODE PATH
+'''
 heapq.heappush(current_heap, (1, (first_name, 0, 1, first_name)))
 hashtable_heap[first_name] = (first_name, 0 , 1, first_name)
+'''
 
 
-a.fewest_node_path(current_heap,hashtable_node,hashtable_heap,list_node,final_x,final_y,'O')
+#a.fewest_node_path(current_heap,hashtable_node,hashtable_heap,list_node,final_x,final_y,'O')
+
+
+print()
+print("Select one of A* algorithm heuristics following:\n")
+print("(1) Straight-Line ") 
+print("(2) Fewest-Nodes")
+choice_algorithm  = input("Your algorithm_option: ")
+#check the right value of input from user
+choice_algorithm = a.check_option(choice_algorithm,1,2)
+
+
+print("Select one of below options:\n")
+print("(1) Step by Step ") 
+print("(2) NO - Step by Step ")
+choice_step = input("Your step_option: ")
+#check the right value of input from user
+choice_step = a.check_option(choice_step,1,2)
+
+
+if choice_algorithm == "2":
+    flag_algorithm = False
+if choice_step == "2":
+    flag_step = False
+
+
+choice_node = input("Select a starting node: ")
+#check the node's name if it is correct with input file
+while choice_node not in hashtable_node:
+    print("\nThe node's name is wrong. Please try again!\n")
+    choice_node = input("Select a starting node: ")
+
+first_name = choice_node
+first_neighbor = a.neighbor_nodes(first_name,hashtable_node, list_node)
+
+row_first_node, column_first_node = hashtable_node[first_name]
+first_node = list_node[row_first_node][column_first_node]
+
+
+if flag_algorithm:
+    distance_straight = a.distance_straight_to_final_node(first_name,final_x,final_y,hashtable_node, list_node)
+    heapq.heappush(current_heap, (distance_straight, (first_name, 0, distance_straight, first_name)))
+    hashtable_heap[first_name] = (first_name, 0 , distance_straight, first_name)
+    a.shortest_path(current_heap,hashtable_node,hashtable_heap,list_node,final_x,final_y,'O',flag_step)
+else:
+    heapq.heappush(current_heap, (1, (first_name, 0, 1, first_name)))
+    hashtable_heap[first_name] = (first_name, 0 , 1, first_name)
+    a.fewest_node_path(current_heap,hashtable_node,hashtable_heap,list_node,final_x,final_y,'O',flag_step)
+
+
+
 
