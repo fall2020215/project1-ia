@@ -106,15 +106,14 @@ def shortest_path(current_heap, hashtable_node, hashtable_heap, list_node, final
         node_expand = heapq.heappop(current_heap)
         
         if node_expand[1][0] == final_name:
-            print("The final solution path is: ")
             total_path = ""
             list_name_node = node_expand[1][3].split("-")
             for i in range (0, len(list_name_node)-1):
                 total_path += list_name_node[i] + " to " + list_name_node[i + 1]  + " distance: " + str(round(distance_between_two_nodes(list_name_node[i],list_name_node[i+1], hashtable_node, list_node), 3)) + ",\n"
 
-            print(total_path)
-            print("*****************************************")
-            print("Total path length: " + str(round(node_expand[1][2], 3)))
+            title = "The final solution path is: \n" + total_path + "\n" + "*****************************************\n" + "Total path length: " + str(round(node_expand[1][2], 3))
+            with open ("maze-sol.txt", "a") as file:
+                file.write(title + "\n")
             flag = True
             break 
         else:
@@ -146,8 +145,7 @@ def shortest_path(current_heap, hashtable_node, hashtable_heap, list_node, final
             
             
             if flag_step:
-                #print the path
-                print("Node selected: " +  node_expand[1][0])
+                
                 possible_node = ""
                 possible_path = ""
     
@@ -155,10 +153,10 @@ def shortest_path(current_heap, hashtable_node, hashtable_heap, list_node, final
                     possible_node += i[1][0] + " "
                     possible_path += i[1][0] + "(" + str(round(i[0],3)) + ")" + " "
 
-                print("Possible node to travel: " + possible_node)
-                print("Node at the end of possible path: " + possible_path)
-                print("********************************************************************************************************************")
+                title = "Node selected: " +  node_expand[1][0] + "\n" + "Possible node to travel: " + possible_node + "\n" + "Node at the end of possible path: " + possible_path + "\n" + "********************************************************************************************************************\n"
 
+                with open ("maze-sol.txt", "a") as file:
+                    file.write(title + "\n")
 
     if flag != True:
         print("Do not have any path to go the final node")
@@ -172,15 +170,14 @@ def fewest_node_path(current_heap, hashtable_node, hashtable_heap, list_node, fi
         node_expand = heapq.heappop(current_heap)
         
         if node_expand[1][0] == final_name:
-            print("The final solution path is: ")
             total_path = ""
             list_name_node = node_expand[1][3].split("-")
             for i in range (0, len(list_name_node)-1):
                 total_path += list_name_node[i] + " to " + list_name_node[i + 1]  + " distance: " + "1,\n"
 
-            print(total_path)
-            print("*****************************************")
-            print("Total path length: " + str(round(node_expand[1][2], 3)))
+            title = "The final solution path is: \n" + total_path + "\n" + "*****************************************\n" + "Total path length: " + str(round(node_expand[1][2], 3))
+            with open ("maze-sol.txt", "a") as file:
+                file.write(title + "\n")
             flag = True
             break 
         else:
@@ -211,8 +208,6 @@ def fewest_node_path(current_heap, hashtable_node, hashtable_heap, list_node, fi
                             hashtable_node[i.get_name()] = (i.get_name(), distance_nodes, total_distance, path)
             
             if flag_step:
-                #print the path
-                print("Node selected: " +  node_expand[1][0])
                 possible_node = ""
                 possible_path = ""
     
@@ -220,10 +215,10 @@ def fewest_node_path(current_heap, hashtable_node, hashtable_heap, list_node, fi
                     possible_node += i[1][0] + " "
                     possible_path += i[1][0] + "(" + str(round(i[0],3)) + ")" + " "
 
-                print("Possible node to travel: " + possible_node)
-                print("Node at the end of possible path: " + possible_path)
-                print("********************************************************************************************************************")
+                title = "Node selected: " +  node_expand[1][0] + "\n" + "Possible node to travel: " + possible_node + "\n" + "Node at the end of possible path: " + possible_path + "\n" + "********************************************************************************************************************\n"
 
+                with open ("maze-sol.txt", "a") as file:
+                    file.write(title + "\n")
 
     if flag != True:
         print("\nDo not have any path to go the final node\n")

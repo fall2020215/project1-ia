@@ -1,0 +1,14 @@
+A* algorithm heuristics: fewest-nodes
+Step-by-Step: No
+Starting node: B44
+
+
+
+The final solution path is: 
+B44 to R60 distance: 1,
+R60 to B57 distance: 1,
+B57 to R8 distance: 1,
+R8 to O distance: 1,
+
+*****************************************
+Total path length: 4
