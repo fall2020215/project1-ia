@@ -1,6 +1,6 @@
 import node as n
 import heapq
-import algorithm as a
+import algorithm_visualization as a
 
 #For visualization
 import matplotlib.pyplot as plt
