@@ -147,18 +147,17 @@ G.add_edges_from(add_edges)
 nx.draw(G, pos=hashtable_node, with_labels=True, font_size=12, node_size=4, edge_color = "g")
 
 
-#The path for shortest path or fewest path
-path_list = path.split("-")
-add_edges_path = []
+if path != None:
+    path_list = path.split("-")
+    add_edges_path = []
 
-for i in range (0, len(path_list) - 1):
-    add_edges_path.append((path_list[i],path_list[i+1]))
+    for i in range (0, len(path_list) - 1):
+        add_edges_path.append((path_list[i],path_list[i+1]))
 
-nx.draw_networkx_edges( G, pos = hashtable_node, edgelist = add_edges_path, width = 4,edge_color = "r")
+    nx.draw_networkx_edges( G, pos = hashtable_node, edgelist = add_edges_path, width = 4,edge_color = "r")
     
 plt.show()
 
 
 ################ FINISH VISUALIZATION ###################################################################
-
 
