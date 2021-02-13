@@ -264,7 +264,6 @@ def graph_dict_node(hashtable_node, list_node):
     for i in hashtable_node:
         if i != 'O':
             list_neighbor = neighbor_nodes(i, hashtable_node, list_node)
-            #print(len(list_neighbor))
             list_neighbor_name = []
             for j in range (0, len(list_neighbor)):
                 

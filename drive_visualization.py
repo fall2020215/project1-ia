@@ -1,3 +1,4 @@
+from typing import Hashable
 import node as n
 import heapq
 import algorithm_visualization as a
@@ -126,12 +127,20 @@ else:
 
 ################ VISUALIZATION ###############################################################################
 
+
+hashtable_node_transfer = {}
+
+for row in range (1, int(size_maze.split()[0]) + 1):
+    for column in range (1, int(size_maze.split()[1]) + 1):
+        name_node = list_node[row-1][column-1].get_name()
+        hashtable_node_transfer[name_node] = (column - 1, int(size_maze.split()[0]) - row)
+
 graph_dict = {}
 
 G = nx.DiGraph()
 
-G.add_nodes_from(hashtable_node.keys())
-for n, p in hashtable_node.items():
+G.add_nodes_from(hashtable_node_transfer.keys())
+for n, p in hashtable_node_transfer.items():
    G.nodes[n]['pos'] = p
 
     
@@ -144,7 +153,7 @@ for i in graph_dict:
 
 #Add all possible path from each node with its direction
 G.add_edges_from(add_edges)
-nx.draw(G, pos=hashtable_node, with_labels=True, font_size=12, node_size=4, edge_color = "g")
+nx.draw(G, pos=hashtable_node_transfer, with_labels=True, font_size=12, node_size=4, edge_color = "g")
 
 
 if path != None:
@@ -154,7 +163,7 @@ if path != None:
     for i in range (0, len(path_list) - 1):
         add_edges_path.append((path_list[i],path_list[i+1]))
 
-    nx.draw_networkx_edges( G, pos = hashtable_node, edgelist = add_edges_path, width = 4,edge_color = "r")
+    nx.draw_networkx_edges( G, pos = hashtable_node_transfer, edgelist = add_edges_path, width = 4,edge_color = "r")
     
 plt.show()
 
